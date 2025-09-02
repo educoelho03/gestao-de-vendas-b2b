@@ -1,13 +1,7 @@
-package br.com.gestao_vendas_b2b.model.entities;
+package br.com.gestao_vendas_b2b.model.dto;
 
-import jakarta.persistence.*;
+public class ClientesDto {
 
-@Entity
-@Table(name = "clientes")
-public class ClientesB2B {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nomeEmpresa;
     private String cnpj;

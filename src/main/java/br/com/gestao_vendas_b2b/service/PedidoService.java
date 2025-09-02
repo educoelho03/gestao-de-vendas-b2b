@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProdutoService {
+public class PedidoService {
 
     PedidosRepository repo;
 
-    public ProdutoService(PedidosRepository repository) {
+    public PedidoService(PedidosRepository repository) {
         this.repo = repository;
     }
 
@@ -56,8 +56,6 @@ public class ProdutoService {
         if(entity == null){
             return false;
         }
-
-        repo.findById(id);
 
         entity.setClientes(dto.getClientes());
         entity.setDate(dto.getDate());
