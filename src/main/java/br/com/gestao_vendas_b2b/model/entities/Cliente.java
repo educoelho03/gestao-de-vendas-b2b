@@ -1,11 +1,29 @@
-package br.com.gestao_vendas_b2b.model.dto;
+package br.com.gestao_vendas_b2b.model.entities;
 
-public class ClientesDto {
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CNPJ;
 
+@Entity
+@Table(name = "clientes")
+public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nomeEmpresa;
+
+    @Column(nullable = false)
+    @NotBlank
+    private String nome;
+
+    @Column(nullable = false)
+    @CNPJ
     private String cnpj;
+
+    @Email
     private String email;
+
     private String phone;
 
     public int getId() {
@@ -16,12 +34,12 @@ public class ClientesDto {
         this.id = id;
     }
 
-    public String getNomeEmpresa() {
-        return nomeEmpresa;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeEmpresa(String nomeEmpresa) {
-        this.nomeEmpresa = nomeEmpresa;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCnpj() {

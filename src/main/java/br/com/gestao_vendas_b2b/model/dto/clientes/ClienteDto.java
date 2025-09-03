@@ -1,9 +1,9 @@
-package br.com.gestao_vendas_b2b.model.dto;
+package br.com.gestao_vendas_b2b.model.dto.clientes;
 
-public class ClientesListDto {
+public class ClienteDto {
 
     private int id;
-    private String nomeEmpresa;
+    private String nome;
     private String cnpj;
     private String email;
     private String phone;
@@ -16,12 +16,12 @@ public class ClientesListDto {
         this.id = id;
     }
 
-    public String getNomeEmpresa() {
-        return nomeEmpresa;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeEmpresa(String nomeEmpresa) {
-        this.nomeEmpresa = nomeEmpresa;
+    public void setNome(String nomeEmpresa) {
+        this.nome = nome;
     }
 
     public String getCnpj() {

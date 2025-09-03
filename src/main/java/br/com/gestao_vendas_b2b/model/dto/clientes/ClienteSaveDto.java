@@ -1,18 +1,18 @@
-package br.com.gestao_vendas_b2b.model.dto;
+package br.com.gestao_vendas_b2b.model.dto.clientes;
 
-public class ClientesSaveDto {
+public class ClienteSaveDto {
 
-    private String nomeEmpresa;
+    private String nome;
     private String cnpj;
     private String email;
     private String phone;
 
-    public String getNomeEmpresa() {
-        return nomeEmpresa;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeEmpresa(String nomeEmpresa) {
-        this.nomeEmpresa = nomeEmpresa;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCnpj() {

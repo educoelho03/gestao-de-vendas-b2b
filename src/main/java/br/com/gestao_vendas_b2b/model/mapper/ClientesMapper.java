@@ -1,16 +1,16 @@
 package br.com.gestao_vendas_b2b.model.mapper;
 
-import br.com.gestao_vendas_b2b.model.dto.ClientesDto;
-import br.com.gestao_vendas_b2b.model.dto.ClientesListDto;
-import br.com.gestao_vendas_b2b.model.entities.ClientesB2B;
+import br.com.gestao_vendas_b2b.model.dto.clientes.ClienteDto;
+import br.com.gestao_vendas_b2b.model.dto.clientes.ClienteListDto;
+import br.com.gestao_vendas_b2b.model.entities.Cliente;
 
 import java.util.function.Function;
 
 public class ClientesMapper {
-    public final static Function<ClientesB2B, ClientesDto> entityToDto = clientes -> {
-        ClientesDto dto = new ClientesDto();
+    public final static Function<Cliente, ClienteDto> entityToDto = clientes -> {
+        ClienteDto dto = new ClienteDto();
 
-        dto.setNomeEmpresa(clientes.getNomeEmpresa());
+        dto.setNome(clientes.getNome());
         dto.setCnpj(clientes.getCnpj());
         dto.setEmail(clientes.getEmail());
         dto.setPhone(clientes.getPhone());
@@ -18,11 +18,11 @@ public class ClientesMapper {
         return dto;
     };
 
-    public final static Function<ClientesB2B, ClientesListDto> entityToListDto =  clientes -> {
-        ClientesListDto dto = new ClientesListDto();
+    public final static Function<Cliente, ClienteListDto> entityToListDto = clientes -> {
+        ClienteListDto dto = new ClienteListDto();
 
         dto.setId(clientes.getId());
-        dto.setNomeEmpresa(clientes.getNomeEmpresa());
+        dto.setNome(clientes.getNome());
         dto.setCnpj(clientes.getCnpj());
         dto.setEmail(clientes.getEmail());
         dto.setPhone(clientes.getPhone());

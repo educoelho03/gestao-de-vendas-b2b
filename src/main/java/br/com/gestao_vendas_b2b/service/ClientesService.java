@@ -1,10 +1,10 @@
 package br.com.gestao_vendas_b2b.service;
 
-import br.com.gestao_vendas_b2b.model.dto.ClientesDto;
-import br.com.gestao_vendas_b2b.model.dto.ClientesListDto;
-import br.com.gestao_vendas_b2b.model.dto.ClientesSaveDto;
-import br.com.gestao_vendas_b2b.model.entities.ClientesB2B;
-import br.com.gestao_vendas_b2b.model.mapper.PedidosMapper;
+import br.com.gestao_vendas_b2b.model.dto.clientes.ClienteDto;
+import br.com.gestao_vendas_b2b.model.dto.clientes.ClienteListDto;
+import br.com.gestao_vendas_b2b.model.dto.clientes.ClienteSaveDto;
+import br.com.gestao_vendas_b2b.model.entities.Cliente;
+import br.com.gestao_vendas_b2b.model.mapper.ClientesMapper;
 import br.com.gestao_vendas_b2b.repository.ClientesRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -21,19 +21,19 @@ public class ClientesService {
         this.repo = repo;
     }
 
-    public List<ClientesListDto> listAll() {
-        List<ClientesListDto> list = repo.findAll().stream()
-                .map(ClientesMapper.entityToDtoList)
+    public List<ClienteListDto> listAll() {
+        List<ClienteListDto> list = repo.findAll().stream()
+                .map(ClientesMapper.entityToListDto)
                 .collect(Collectors.toList());
 
         return list;
     }
 
     @Transactional
-    public int create(ClientesSaveDto clientes) {
-        ClientesB2B entity = new ClientesB2B();
+    public int create(ClienteSaveDto clientes) {
+        Cliente entity = new Cliente();
 
-        entity.setNomeEmpresa(clientes.getNomeEmpresa());
+        entity.setNome(clientes.getNome());
         entity.setCnpj(clientes.getCnpj());
         entity.setEmail(clientes.getEmail());
         entity.setPhone(clientes.getPhone());
@@ -44,21 +44,21 @@ public class ClientesService {
     }
 
     @Transactional
-    public boolean update(ClientesDto dto, int id){
-        ClientesB2B entity = repo.findByIdCliente(id);
+    public boolean update(ClienteDto dto, int id){
+        Cliente entity = repo.findByIdCliente(id);
 
         if(entity == null){
             return false;
         }
 
-        entity.setNomeEmpresa(dto.getNomeEmpresa());
+        entity.setNome(dto.getNome());
         entity.setCnpj(dto.getCnpj());
         entity.setEmail(dto.getEmail());
         entity.setPhone(dto.getPhone());
 
         repo.save(entity);
 
-        PedidosMapper.entityToDto.apply(entity);
+        ClientesMapper.entityToDto.apply(entity);
 
         return true;
 
