@@ -19,7 +19,7 @@ public class Funcionario {
     private String email;
 
     @NotBlank
-    private String senha;
+    private String senha; // TODO: CRIPTOGRAFAR A SENHA NA HORA DE SALVAR O USUARIO(passwordEncoder)
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
