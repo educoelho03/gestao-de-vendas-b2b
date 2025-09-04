@@ -45,7 +45,7 @@ public class ClientesService {
 
     @Transactional
     public boolean update(ClienteDto dto, int id){
-        Cliente entity = repo.findByIdCliente(id);
+        Cliente entity = repo.findById(id);
 
         if(entity == null){
             return false;

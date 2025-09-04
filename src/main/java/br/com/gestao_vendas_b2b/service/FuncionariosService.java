@@ -8,6 +8,7 @@ import br.com.gestao_vendas_b2b.model.enums.Cargo;
 import br.com.gestao_vendas_b2b.model.mapper.FuncionarioMapper;
 import br.com.gestao_vendas_b2b.repository.FuncionarioRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,12 @@ import java.util.stream.Collectors;
 public class FuncionariosService {
 
     FuncionarioRepository repo;
+    PasswordEncoder passwordEncoder;
 
-    public FuncionariosService(FuncionarioRepository repo) {
+    public FuncionariosService(FuncionarioRepository repo, PasswordEncoder passwordEncoder) {
         this.repo = repo;
+        this.passwordEncoder = passwordEncoder;
     }
-
 
     public List<FuncionarioListDto> listAll() {
         List<FuncionarioListDto> list = repo.findAll().stream()
@@ -37,7 +39,7 @@ public class FuncionariosService {
 
         entity.setNome(funcionario.getNome());
         entity.setEmail(funcionario.getEmail());
-        entity.setSenha(funcionario.getEmail());
+        entity.setSenha(passwordEncoder.encode(funcionario.getSenha()));
         entity.setCargo(Cargo.VENDEDOR);
 
         repo.save(entity);
@@ -47,7 +49,7 @@ public class FuncionariosService {
 
     @Transactional
     public boolean update(FuncionarioDto dto, int id){
-        Funcionario entity = repo.findByIdFuncionario(id);
+        Funcionario entity = repo.findById(id);
 
         if(entity == null){
             return false;

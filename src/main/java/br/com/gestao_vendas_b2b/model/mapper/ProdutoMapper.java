@@ -10,8 +10,8 @@ public class ProdutoMapper {
     public final static Function<Produto, ProdutoDto> entityToDto = produto -> {
         ProdutoDto dto = new ProdutoDto();
 
-        dto.setName(produto.getName());
-        dto.setPrice(produto.getPrice());
+        dto.setNome(produto.getNome());
+        dto.setPreco(produto.getPreco());
         dto.setEstoque(produto.getEstoque());
 
         return dto;
@@ -21,8 +21,8 @@ public class ProdutoMapper {
         ProdutoListDto dto = new ProdutoListDto();
 
         dto.setId(produto.getId());
-        dto.setName(produto.getName());
-        dto.setPrice(produto.getPrice());
+        dto.setName(produto.getNome());
+        dto.setPrice(produto.getPreco());
         dto.setEstoque(produto.getEstoque());
 
         return dto;

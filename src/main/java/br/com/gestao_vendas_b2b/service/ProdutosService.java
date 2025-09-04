@@ -44,14 +44,14 @@ public class ProdutosService {
 
     @Transactional
     public boolean update(ProdutoDto dto, int id){
-        Produto entity = repo.findByIdProduto(id);
+        Produto entity = repo.findById(id);
 
         if(entity == null){
             return false;
         }
 
-        entity.setName(dto.getName());
-        entity.setPrice(dto.getPrice());
+        entity.setNome(dto.getNome());
+        entity.setPreco(dto.getPreco());
         entity.setEstoque(dto.getEstoque());
 
         repo.save(entity);

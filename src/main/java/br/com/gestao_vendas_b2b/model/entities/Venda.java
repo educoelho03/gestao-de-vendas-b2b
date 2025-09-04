@@ -2,17 +2,18 @@ package br.com.gestao_vendas_b2b.model.entities;
 
 import br.com.gestao_vendas_b2b.model.enums.StatusVenda;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "vendas")
 public class Venda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
@@ -25,11 +26,16 @@ public class Venda {
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ItemVenda> itens;
 
+    @Column(name = "data_venda")
+    @NotBlank
     private LocalDate data;
 
+    @NotBlank
     private Double total;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status_venda")
+    @NotBlank
     private StatusVenda statusVenda;
 
 

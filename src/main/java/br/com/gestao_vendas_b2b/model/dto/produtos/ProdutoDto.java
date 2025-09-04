@@ -6,7 +6,7 @@ public class ProdutoDto {
 
     private int id;
     private String nome;
-    private BigDecimal price;
+    private BigDecimal preco;
     private Integer estoque;
 
     public int getId() {
@@ -25,12 +25,12 @@ public class ProdutoDto {
         this.nome = nome;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getPreco() {
+        return preco;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
     }
 
     public Integer getEstoque() {

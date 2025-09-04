@@ -45,7 +45,7 @@ public class FuncionarioController { // TODO: CRIAR AUTENTICACAO DOS USUARIOS, S
         }
     }
 
-    @PostMapping("/create")
+    @PostMapping("/auth/register")
     public ResponseEntity<Integer> create(FuncionarioSaveDto dto){
         int id = funcionariosService.create(dto);
 

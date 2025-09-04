@@ -23,7 +23,7 @@ public class ItemVenda {
     @NotBlank
     private Integer quantidade;
 
-    @Column(nullable = false)
+    @Column(name = "preco_unitario", nullable = false)
     @NotBlank
     private Double precoUnitario;
 
