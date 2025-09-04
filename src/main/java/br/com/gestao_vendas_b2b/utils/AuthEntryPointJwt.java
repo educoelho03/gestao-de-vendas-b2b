@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public abstract class AuthEntryPointJwt implements AuthenticationEntryPoint { // classe para lidar com tentativas de acesso a endpoints da minha aplicação
+public class AuthEntryPointJwt implements AuthenticationEntryPoint { // classe para lidar com tentativas de acesso a endpoints da minha aplicação
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {

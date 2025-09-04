@@ -1,11 +1,11 @@
 package br.com.gestao_vendas_b2b.utils;
 
-import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -33,6 +33,37 @@ public class JwtUtils {
                 .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(getSigningKey())
                 .compact();
+    }
+
+    public String getEmailFromToken(String token){
+        try {
+            Claims claims = Jwts.parser()
+                    .verifyWith((SecretKey) getSigningKey())
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+
+            return claims.getSubject();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao extrair email do token: " + e.getMessage());
+        }
+    }
+
+    public boolean validateToken(String token){
+        try {
+            Jwts.parser()
+                    .verifyWith((SecretKey) getSigningKey())
+                    .build()
+                    .parseSignedClaims(token);
+
+            return true;
+        } catch (ExpiredJwtException e) {
+            System.out.println("Token expirado: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Token inválido: " + e.getMessage());
+            return false;
+        }
     }
 
 }
