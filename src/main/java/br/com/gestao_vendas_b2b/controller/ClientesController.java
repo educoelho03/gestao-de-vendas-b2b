@@ -49,11 +49,6 @@ public class ClientesController {
     public ResponseEntity<Integer> create(ClienteSaveDto dto){
         int id = clienteService.create(dto);
 
-        String subject = "🚀 Bem-vindo(a) ao Sistema de Gestão de Vendas! - Cliente";
-        String body = "Olá, Seja bem-vindo(a) ao nosso Sistema de Gestão de Vendas! ";
-
-        emailService.sendMail(dto.getEmail(), subject, body);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 

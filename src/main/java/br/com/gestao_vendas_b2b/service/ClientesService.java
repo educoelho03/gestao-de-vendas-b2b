@@ -1,5 +1,6 @@
 package br.com.gestao_vendas_b2b.service;
 
+import br.com.gestao_vendas_b2b.event.ClienteCadastradoEvent;
 import br.com.gestao_vendas_b2b.model.dto.clientes.ClienteDto;
 import br.com.gestao_vendas_b2b.model.dto.clientes.ClienteListDto;
 import br.com.gestao_vendas_b2b.model.dto.clientes.ClienteSaveDto;
@@ -7,6 +8,7 @@ import br.com.gestao_vendas_b2b.model.entities.Cliente;
 import br.com.gestao_vendas_b2b.model.mapper.ClientesMapper;
 import br.com.gestao_vendas_b2b.repository.ClientesRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +18,11 @@ import java.util.stream.Collectors;
 public class ClientesService {
 
     public ClientesRepository repo;
+    public ApplicationEventPublisher eventPublisher;
 
-    public ClientesService(ClientesRepository repo) {
+    public ClientesService(ClientesRepository repo, ApplicationEventPublisher eventPublisher) {
         this.repo = repo;
+        this.eventPublisher = eventPublisher;
     }
 
     public List<ClienteListDto> listAll() {
@@ -37,6 +41,8 @@ public class ClientesService {
         entity.setCnpj(clientes.getCnpj());
         entity.setEmail(clientes.getEmail());
         entity.setPhone(clientes.getPhone());
+
+        eventPublisher.publishEvent(new ClienteCadastradoEvent(this, entity.getNome(), entity.getEmail()));
 
         repo.save(entity);
 

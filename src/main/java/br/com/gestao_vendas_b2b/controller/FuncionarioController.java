@@ -49,11 +49,6 @@ public class FuncionarioController { // TODO: CRIAR AUTENTICACAO DOS USUARIOS, S
     public ResponseEntity<Integer> create(FuncionarioSaveDto dto){
         int id = funcionariosService.create(dto);
 
-        String subject = "🚀 Bem-vindo(a) ao Sistema de Gestão de Vendas! - Funcionario";
-        String body = "Olá, Seja bem-vindo(a) ao nosso Sistema de Gestão de Vendas! ";
-
-        emailService.sendMail(dto.getEmail(), subject, body);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
